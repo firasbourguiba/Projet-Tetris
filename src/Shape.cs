@@ -5,7 +5,7 @@ namespace TetrisProject
 {
     public class Shape
     {
-        public Point[] Blocks { get; private set; }
+         public Point[] Blocks { get; set; }
         public Color ShapeColor { get; private set; }
 
         public Shape(Point[] blocks, Color color)
@@ -25,6 +25,17 @@ namespace TetrisProject
                                 cellSize);
             }
         }
+        public void Rotate(Point pivot)
+        {
+             for (int i = 0; i < Blocks.Length; i++)
+               {
+                    int x = Blocks[i].Y - pivot.Y;
+                    int y = Blocks[i].X - pivot.X;
+                    Blocks[i].X = pivot.X - x;
+                    Blocks[i].Y = pivot.Y + y;
+                }
+        }
+
 
         public static Shape GetRandomShape()
         {

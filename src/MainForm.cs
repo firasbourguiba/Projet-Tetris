@@ -11,6 +11,9 @@ namespace TetrisProject
         private Game game;
         private Label scoreLabel;
         private Button restartButton;
+        private Button pauseButton;
+        private PictureBox nextShapePreview;
+        private bool isPaused = false;
 
         public MainForm()
         {
@@ -46,9 +49,26 @@ namespace TetrisProject
             };
             restartButton.Click += (sender, e) => RestartGame();
 
+            pauseButton = new Button
+            {
+                Text = "Pause",
+                Location = new Point(270, 60),
+                Size = new Size(80, 30)
+            };
+            pauseButton.Click += (sender, e) => TogglePause();
+
+            nextShapePreview = new PictureBox
+            {
+                Location = new Point(50, 50),
+                Size = new Size(100, 100),
+                BackColor = Color.Gray
+            };
+
             Controls.Add(gameGrid);
             Controls.Add(scoreLabel);
             Controls.Add(restartButton);
+            Controls.Add(pauseButton);
+            Controls.Add(nextShapePreview);
 
             game = new Game(gameGrid, scoreLabel);
         }
@@ -58,9 +78,24 @@ namespace TetrisProject
             game.StartNewGame();
         }
 
+        private void TogglePause()
+        {
+            isPaused = !isPaused;
+            if (isPaused)
+            {
+                game.PauseGame();
+                pauseButton.Text = "Resume";
+            }
+            else
+            {
+                game.ResumeGame();
+                pauseButton.Text = "Pause";
+            }
+        }
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (game != null)
+            if (game != null && !isPaused)
             {
                 switch (e.KeyCode)
                 {
@@ -80,5 +115,11 @@ namespace TetrisProject
                 gameGrid.Invalidate();
             }
         }
+
+        public void UpdateScore(int newScore)
+        {
+            scoreLabel.Text = $"Score: {newScore}";
+        }
+        
     }
 }

@@ -25,9 +25,19 @@ namespace TetrisProject
         public void StartNewGame()
         {
             currentShape = Shape.GetRandomShape();
+            gameGrid.DrawShape(currentShape);
             gameTimer = new System.Windows.Forms.Timer();
-            gameTimer.Interval = 500;
+            gameTimer.Interval = 300;
             gameTimer.Tick += Update;
+            gameTimer.Start();
+        }
+        public void PauseGame()
+        {
+            gameTimer.Stop();
+        }
+
+        public void ResumeGame()
+        {
             gameTimer.Start();
         }
 
@@ -38,7 +48,7 @@ namespace TetrisProject
             StartNewGame();
         }
 
-        private void Update(object sender, EventArgs e)
+     private void Update(object sender, EventArgs e)
         {
             Point[] movedBlocks = new Point[currentShape.Blocks.Length];
             for (int i = 0; i < currentShape.Blocks.Length; i++)
@@ -49,11 +59,14 @@ namespace TetrisProject
             if (!gameGrid.CheckCollision(movedBlocks))
             {
                 MoveShapeDown();
+                gameGrid.DrawShape(currentShape);
             }
             else
             {
                 gameGrid.PlaceShape(currentShape.Blocks, Brushes.Blue);
+                LockShape();
                 gameGrid.ClearLines();
+                UpdateScore();
 
                 if (CheckGameOver())
                 {
@@ -66,17 +79,63 @@ namespace TetrisProject
                     return;
                 }
                 currentShape = Shape.GetRandomShape();
+                gameGrid.DrawShape(currentShape);
             }
-            gameGrid.Invalidate();
+            //gameGrid.Invalidate();
         }
 
-        public void MoveShapeDown()
+         public void MoveShapeDown()
         {
             for (int i = 0; i < currentShape.Blocks.Length; i++)
             {
                 currentShape.Blocks[i].Y += 1;
             }
         }
+
+        public void UpdateScore()
+        {
+            scoreLabel.Text = $"Score: {score}";
+        }
+        public void RotateShape()
+        {
+            Point pivot = currentShape.Blocks[1];
+            Point[] rotatedBlocks = new Point[currentShape.Blocks.Length];
+
+            for (int i = 0; i < currentShape.Blocks.Length; i++)
+            {
+                int x = currentShape.Blocks[i].Y - pivot.Y;
+                int y = currentShape.Blocks[i].X - pivot.X;
+                rotatedBlocks[i] = new Point(pivot.X - x, pivot.Y + y);
+            }
+
+            if (!gameGrid.CheckCollision(rotatedBlocks))
+            {
+                currentShape.Blocks = rotatedBlocks;
+            }
+        }
+
+        private bool CheckGameOver()
+        {
+            foreach (Point block in currentShape.Blocks)
+            {
+                if (block.Y < 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+         private void LockShape()
+        {
+            foreach (Point block in currentShape.Blocks)
+            {
+                if (block.Y >= 0)
+                {
+                    gridMatrix[block.X, block.Y] = true;
+                }
+            }
+        }
+
          public void MoveShapeLeft()
         {
             Point[] movedBlocks = new Point[currentShape.Blocks.Length];
@@ -113,18 +172,7 @@ namespace TetrisProject
 
 
 
-        public void RotateShape()
-        {
-            Point pivot = currentShape.Blocks[1];
-            for (int i = 0; i < currentShape.Blocks.Length; i++)
-            {
-                int x = currentShape.Blocks[i].Y - pivot.Y;
-                int y = currentShape.Blocks[i].X - pivot.X;
-                currentShape.Blocks[i].X = pivot.X - x;
-                currentShape.Blocks[i].Y = pivot.Y + y;
-            }
-        }
-
+        
         private bool CheckCollision(int offsetX, int offsetY)
         {
             foreach (Point block in currentShape.Blocks)
@@ -139,16 +187,7 @@ namespace TetrisProject
             return false;
         }
 
-        private void LockShape()
-        {
-            foreach (Point block in currentShape.Blocks)
-            {
-                if (block.Y >= 0)
-                {
-                    gridMatrix[block.X, block.Y] = true;
-                }
-            }
-        }
+       
 
         private void ClearLines()
         {
@@ -178,16 +217,6 @@ namespace TetrisProject
             }
         }
 
-        private bool CheckGameOver()
-        {
-            foreach (Point block in currentShape.Blocks)
-            {
-                if (block.Y < 0)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        
     }
 }
