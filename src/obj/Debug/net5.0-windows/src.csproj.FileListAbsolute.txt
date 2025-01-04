@@ -1,0 +1,16 @@
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.csproj.AssemblyReference.cache
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.AssemblyInfoInputs.cache
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.AssemblyInfo.cs
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.csproj.CoreCompileInputs.cache
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.exe
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.deps.json
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.runtimeconfig.json
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.runtimeconfig.dev.json
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.dll
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\ref\src.dll
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\bin\Debug\net5.0-windows\src.pdb
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.dll
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\ref\src.dll
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.pdb
+C:\Users\firas\Documents\ynov\B2\E-commerce\docs\Projet-Tetris\src\obj\Debug\net5.0-windows\src.genruntimeconfig.cache
